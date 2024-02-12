@@ -8,7 +8,7 @@ const customer = {
 
 const customerArray = [customer]
 
-export function GetAllCustomer() {
+export function GetAllCustomers() {
     return customerArray
 }
 

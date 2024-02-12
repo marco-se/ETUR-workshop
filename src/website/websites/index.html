@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,96 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-    <div class="header">
-        <button>Add Customer</button>
+    <div class="wrapper" id="wrapperID">
+        <div class="header">
+            <div>
+                <h1>Customer Manager</h1>
+            </div>
+            <div>
+                <button class="navButton" onclick="toggleCreatePopup()">Add Customer</button>
+                <button class="navButton" onclick="toggleCheckCustomerPopup()">Check Customer</button>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="content">
+            <div class="card">
+                <span>ID: 1</span>
+                <span>Name: Basti</span>
+                <span>Email: basti@mail.com</span>
+                <span>Tel: 01758774403</span>
+            </div>
+            <div class="card">
+                <span>ID: 2</span>
+                <span>Name: Loris</span>
+                <span>Email: lors@mail.com</span>
+                <span>Tel: 0175564403</span>
+            </div>
+            <div class="card">
+                <span>ID: 3</span>
+                <span>Name: Markus</span>
+                <span>Email: markus@mail.com</span>
+                <span>Tel: 017537744893</span>
+            </div>
+            <div class="card">
+                <span>ID: 4</span>
+                <span>Name: Alper</span>
+                <span>Email: alper@mail.com</span>
+                <span>Tel: 0179913103</span>
+            </div>
+            <div class="card">
+                <span>ID: 5</span>
+                <span>Name: David</span>
+                <span>Email: david@mail.com</span>
+                <span>Tel: 0175362593</span>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="popups">
+        <div class="createCustomer" id="createCustomerID">
+            <form action="/endpoint1" method="POST">
+                <h1>Add Customer</h1>
+                <div class="element">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="customer_name" required="true" />
+                </div>
+                <div class="element">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="customer_email" required="true" />
+                </div>
+                <div class="element">
+                    <label for="phone_number">Phone number</label>
+                    <input id="phone_number" type="tel" name="customer_phonenumber" required="true" />
+                </div>
+                <button type="submit" onclick="createCustomer()">Create Customer</button>
+            </form>
+        </div>
+
+        <div class="validateCustomerNumber" id="validateCustomerNumberID">
+            <form action="/endpoint2" mehtod="GET">
+                <ul>
+                    <li>
+                        <label for="customer_number">Kundennummer</label>
+                        <input id="customer_number" type="text" inputmode="numeric" pattern="[0-9]"
+                            name="customer_number" required="true" />
+                    </li>
+                    <li>
+                        <button type="submit" onclick="checkCustomer()">Check Customer Number</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
 
     </div>
 
-    <content class="content">
-        
-    </content>
-
-    <script src="dateiname.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

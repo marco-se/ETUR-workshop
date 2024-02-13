@@ -18,7 +18,7 @@
             </div>
             <div>
                 <button class="navButton" onclick="toggleCreatePopup()">Add Customer</button>
-                <button class="navButton" onclick="toggleCheckCustomerPopup()">Check Customer</button>
+                <button class="navButton" onclick="toggleCheckCustomerPopup()">Check Customer ID</button>
             </div>
         </div>
 
@@ -74,25 +74,28 @@
                     <input id="email" type="email" name="customer_email" required="true" />
                 </div>
                 <div class="element">
-                    <label for="phone_number">Phone number</label>
+                    <label for="phone_number">Phone</label>
                     <input id="phone_number" type="tel" name="customer_phonenumber" required="true" />
                 </div>
                 <button type="submit" onclick="createCustomer()">Create Customer</button>
+                <button class="closeButton" onclick="toggleCreatePopup()">
+                    Close
+                </button>
             </form>
         </div>
 
         <div class="validateCustomerNumber" id="validateCustomerNumberID">
             <form action="/endpoint2" mehtod="GET">
-                <ul>
-                    <li>
-                        <label for="customer_number">Kundennummer</label>
+                <h1>Check Customer ID</h1>
+                <div class="element">
+                    <label for="customer_number">Customer ID</label>
                         <input id="customer_number" type="text" inputmode="numeric" pattern="[0-9]"
                             name="customer_number" required="true" />
-                    </li>
-                    <li>
-                        <button type="submit" onclick="checkCustomer()">Check Customer Number</button>
-                    </li>
-                </ul>
+                </div>
+                <button type="submit" onclick="checkCustomer()">Check Customer ID</button>
+                <button class="closeButton" onclick="toggleCheckCustomerPopup()">
+                    Close
+                </button>
             </form>
         </div>
 

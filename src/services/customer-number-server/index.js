@@ -2,12 +2,12 @@ import { GetAllCustomers, CreateCustomer, GetCustomer, RemoveCustomer, ValidateC
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 
-fastify.register(cors, {
-  origin: '*'
-});
 const fastify = Fastify({
   logger: true
 })
+fastify.register(cors, {
+  origin: '*'
+});
 const customerInputOutputSchema = {
     schema: {
       body: {
@@ -66,10 +66,6 @@ const customersOutputSchema = {
     }
 }
 
-// Get all customers
-fastify.get('/', customersOutputSchema, async function handler (request, reply) {
-  return GetAllCustomers()
-})
 //Get all customers
 fastify.get('/customers', customersOutputSchema, async function handler (request, reply) {
     return GetAllCustomers()

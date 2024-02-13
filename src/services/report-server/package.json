@@ -1,0 +1,14 @@
+{
+  "name": "report-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "fastify": "^4.26.0"
+  }
+}

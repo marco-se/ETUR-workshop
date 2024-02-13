@@ -1,6 +1,8 @@
-import { GetAllCustomerReports, CreateCustomerReport,
+import {
+  GetAllCustomerReports, CreateCustomerReport,
   GetAllDeveloperReports, EditReportAsDeveloper,
-  GetAllReports, EditReportAsManager } from './api-functions.js';
+  GetAllReports, EditReportAsManager
+} from './api-functions.js';
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 
@@ -11,33 +13,106 @@ fastify.register(cors, {
   origin: '*'
 });
 
+const customerGetSchema = {
+  schema: {
+    response: {
+      200: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: { type: 'string' },
+            category: { type: 'string' },
+            description: { type: 'string' },
+            state: { type: 'string' },
+            closeReason: { type: 'string' },
+            comments: { type: 'array' },
+          }
+        }
+      }
+    }
+  }
+}
 //Get all reports for a customer
-fastify.get('/customer/:id/reports', async function handler (request, reply) {
+fastify.get('/customer/:id/reports', customerGetSchema, async function handler(request, reply) {
   return GetAllCustomerReports(request.params.id)
 })
 
+const customerPostSchema = {
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        customerId: { type: 'string' },
+        category: { type: 'string' },
+        description: { type: 'string' },
+      },
+      required: ['customerId', 'category', 'description']
+    },
+  }
+}
 //Customer defines a report
-fastify.post('/customer/report', async function handler (request, reply) {
+fastify.post('/customer/report', customerPostSchema, async function handler(request, reply) {
   return CreateCustomerReport(request.body.category, request.body.customerId, request.body.description)
 })
 
 //Get all reports for a developer
-fastify.get('/developer/:name/reports', async function handler (request, reply) {
+fastify.get('/developer/:name/reports', async function handler(request, reply) {
   return GetAllDeveloperReports(request.params.name)
 })
 
+const developerPostSchema = {
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        closeReason: { type: 'string' },
+        comment: {
+          type: 'object',
+          properties: {
+            author: { type: 'string' },
+            message: { type: 'string' },
+          }
+        }
+      },
+      required: ['id', 'closeReason']
+    },
+  }
+}
 //Edit a report as a developer
-fastify.post('/developer/:name/report', async function handler (request, reply) {
-  return EditReportAsDeveloper(request.params.name, request.body.id, request.body.closeReason)
+fastify.post('/developer/:name/report', developerPostSchema, async function handler(request, reply) {
+  return EditReportAsDeveloper(request.params.name, request.body.id, request.body.closeReason, request.body.comment)
 })
 
 //Get all reports for a product manager
-fastify.get('/manager/reports', async function handler (request, reply) {
+fastify.get('/manager/reports', async function handler(request, reply) {
   return GetAllReports()
 })
 
+const managerPostSchema = {
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+        assignedTo: { type: 'string' },
+        priority: { type: 'string' },
+        comment: {
+          type: 'object',
+          properties: {
+            author: { type: 'string' },
+            message: { type: 'string' },
+          }
+        }
+      },
+      required: ['id', 'assignedTo', 'priority']
+    },
+  }
+}
+
 //Edit a report as a product manager
-fastify.post('/manager/report', async function handler (request, reply) {
+fastify.post('/manager/report', managerPostSchema, async function handler(request, reply) {
   return EditReportAsManager(request.body.id, request.body.assignedTo, request.body.priority, request.body.comment)
 })
 

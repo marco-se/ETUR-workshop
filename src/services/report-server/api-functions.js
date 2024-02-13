@@ -22,13 +22,21 @@ export function GetAllDeveloperReports(name) {
     return reportArray.filter((element) => element.assignedTo === name);
 }
 
-export function EditReportAsDeveloper(name, id, closeReason) {
+export function EditReportAsDeveloper(name, id, closeReason, comment) {
     let report = reportArray.find(report => report.id === id);
-    if(report === undefined) {
+    if (report === undefined) {
         return new Error("There is no report with this id");
     }
-    if(report.assignedTo !== name) {
+    if (report.assignedTo !== name) {
         return new Error("Developer is not assigned to this report.");
+    }
+    if (report.comments === undefined) {
+        report.comments = [];
+    }
+    if (comment !== undefined) {
+        comment.createdAt = getCurrentDateTimeFormatted();
+        comment.type = "product manager";
+        report.comments.push(comment);
     }
     report.state = "Closed";
     report.closedAt = getCurrentDateTimeFormatted();
@@ -41,16 +49,21 @@ export function GetAllReports() {
 
 export function EditReportAsManager(id, assignedTo, priority, comment) {
     let report = reportArray.find(report => report.id === id);
-    if(report === undefined) {
+    if (report === undefined) {
         return new Error("There is no report with this id");
     }
     report.editedAt = getCurrentDateTimeFormatted();
     report.assignedTo = assignedTo;
     report.priority = priority;
-    if(report.comments === undefined) {
+    if (report.comments === undefined) {
         report.comments = [];
     }
-    report.comments.push(comment);
+
+    if (comment !== undefined) {
+        comment.createdAt = getCurrentDateTimeFormatted();
+        comment.type = "product manager";
+        report.comments.push(comment);
+    }
 }
 
 function getCurrentDateTimeFormatted() {

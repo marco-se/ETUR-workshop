@@ -35,7 +35,19 @@ async function getAllCustomers() {
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
-        return await response.json();
+        const customers = await response.json();
+
+        let cards = "";
+
+        customers.forEach(element => {
+            cards += `<div class="card">
+                <span>ID: ${element.id}</span>
+                <span>Name: ${element.name}</span>
+                <span>Email: ${element.email}</span>
+                <span>Tel: ${element.phone}</span>
+                </div>`;
+        });
+        document.getElementById("cards").innerHTML = cards;
 
     } catch (error) {
         console.error(error);
@@ -44,6 +56,9 @@ async function getAllCustomers() {
 
 async function createCustomer() {
     const form = document.getElementById("createForm");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+    });
     const formData = new FormData(form);
 
     const data = {
@@ -69,14 +84,19 @@ async function createCustomer() {
     } catch (error) {
         console.error(error);
     }
-
+    getAllCustomers();
     toggleCreatePopup();
 }
 
 async function checkCustomer() {
-    const customer_number = document.getElementById("customer_number").value;
+    const form = document.getElementById("checkForm");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+    });
+    const formData = new FormData(form);
+
     try {
-        const response = await fetch("http://localhost:3000/validate/" + customer_number, {
+        const response = await fetch("http://localhost:3000/validate/" + formData.get("customer_number"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -87,26 +107,25 @@ async function checkCustomer() {
             throw new Error("Something went wrong");
         }
         const result = await response.json();
-
+        console.log(result);
         if (result === true) {
-            console.log(true)
+            document.getElementById("result").innerHTML = "Diese ID existiert."
         }
         else if (result === false) {
-            console.log(false)
+            document.getElementById("result").innerHTML = "Diese ID existiert nicht."
         }
 
     } catch (error) {
         console.error(error);
     }
-
-    toggleCheckCustomerPopup();
 }
 
 
-function toggleCheckMark() {
-    document.getElementById("checkMark").classList.toggle("active");
+function toggleCheck() {
+    document.getElementById("check").classList.toggle("active");
 }
 
 function toggleCross() {
     document.getElementById("cross").classList.toggle("active");
 }
+

@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body onload="getAllCustomers()">
     <div class="wrapper" id="wrapperID">
         <div class="header">
             <div>
@@ -25,37 +25,7 @@
         <br>
         <br>
 
-        <div class="content">
-            <div class="card">
-                <span>ID: 1</span>
-                <span>Name: Basti</span>
-                <span>Email: basti@mail.com</span>
-                <span>Tel: 01758774403</span>
-            </div>
-            <div class="card">
-                <span>ID: 2</span>
-                <span>Name: Loris</span>
-                <span>Email: lors@mail.com</span>
-                <span>Tel: 0175564403</span>
-            </div>
-            <div class="card">
-                <span>ID: 3</span>
-                <span>Name: Markus</span>
-                <span>Email: markus@mail.com</span>
-                <span>Tel: 017537744893</span>
-            </div>
-            <div class="card">
-                <span>ID: 4</span>
-                <span>Name: Alper</span>
-                <span>Email: alper@mail.com</span>
-                <span>Tel: 0179913103</span>
-            </div>
-            <div class="card">
-                <span>ID: 5</span>
-                <span>Name: David</span>
-                <span>Email: david@mail.com</span>
-                <span>Tel: 0175362593</span>
-            </div>
+        <div class="content" id="cards">
         </div>
     </div>
 
@@ -89,23 +59,23 @@
                 <h1>Check Customer ID</h1>
                 <div class="element">
                     <label for="customer_number">Customer ID</label>
-                    <input id="customer_number" type="text" inputmode="numeric" pattern="[0-9]" name="customer_number"
-                        required="true" />
+                    <input id="customer_number" type="text" name="customer_number" required="true" />
                 </div>
                 <button class="closeButton" onclick="toggleCheckCustomerPopup()">
                     Close
                 </button>
-                <button type="submit" onclick="checkCustomer()">Check Customer ID</button>
+                <button onclick="checkCustomer()">Check Customer ID</button>
+                <p id="result"></p>
             </form>
         </div>
     </div>
 
-    <div class="image" id="checkMark">
-        <img src="assets/checkMark.jpg">
+    <div class="image" id="check">
+        <img src="assets/True.jpg" onclick="toggleCheck()">
     </div>
 
     <div class="image" id="cross">
-        <img src="assets/cross.png">
+        <img src="assets/False.png" onclick="toggleCross()">
     </div>
 
     <script src="script.js"></script>

@@ -81,7 +81,7 @@ const developerPostSchema = {
   }
 }
 //Edit a report as a developer
-fastify.post('/developer/:name/report', developerPostSchema, async function handler(request, reply) {
+fastify.patch('/developer/:name/report', developerPostSchema, async function handler(request, reply) {
   return EditReportAsDeveloper(request.params.name, request.body.id, request.body.closeReason, request.body.comment)
 })
 
@@ -112,7 +112,7 @@ const managerPostSchema = {
 }
 
 //Edit a report as a product manager
-fastify.post('/manager/report', managerPostSchema, async function handler(request, reply) {
+fastify.patch('/manager/report', managerPostSchema, async function handler(request, reply) {
   return EditReportAsManager(request.body.id, request.body.assignedTo, request.body.priority, request.body.comment)
 })
 

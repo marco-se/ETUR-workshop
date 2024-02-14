@@ -161,7 +161,7 @@ const updateDescriptionSchema = {
   }
 }
 //Updates the description of a report
-fastify.patch('/report/descrition', updateDescriptionSchema, async function handler(request, reply) {
+fastify.patch('/report/description', updateDescriptionSchema, async function handler(request, reply) {
   return UpdateReportDescription(request.body.id, request.body.description)
 })
 
@@ -245,10 +245,11 @@ const updateCommentSchema = {
             author: { type: 'string' },
             message: { type: 'string' },
             type: { type: 'string' }
-          }
+          },
+          required: ['author', 'message', 'type']
         }
       },
-      required: ['id', 'comment', 'author', 'message', 'type']
+      required: ['id', 'comment']
     }
   }
 }
@@ -271,7 +272,7 @@ const updateCloseReasonSchema = {
 }
 //Updates the close reason of a report
 fastify.patch('/report/closeReason', updateCloseReasonSchema, async function handler(request, reply) {
-  return UpdateReportCloseReason(request.body.closeReason, request.body.id)
+  return UpdateReportCloseReason(request.body.id, request.body.closeReason)
 })
 
 const updateReferenceSchema = {
@@ -286,10 +287,11 @@ const updateReferenceSchema = {
             type: { type: 'string' },
             url: { type: 'string' },
             issueNumber: { type: 'string' }
-          }
+          },
+          required: ['type', 'url', 'issueNumber']
         }
       },
-      required: ['id', 'reference', 'type', 'url', 'issueNumber']
+      required: ['id', 'reference']
     }
   }
 }

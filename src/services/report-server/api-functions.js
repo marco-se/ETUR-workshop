@@ -1,7 +1,7 @@
 import { getReportId, increaseReportId, reportArray } from "./data-model/report-model.js"
 
 export function GetAllCustomerReports(id) {
-    return reportArray.filter((element) => element.customerId === id);
+    return reportArray.filter((report) => report.customerId === id);
 }
 
 export function CreateCustomerReport(category, customerId, description, label) {
@@ -26,7 +26,7 @@ export function CreateCustomerReport(category, customerId, description, label) {
 }
 
 export function GetAllDeveloperReports(name) {
-    return reportArray.filter((element) => element.assignedTo === name);
+    return reportArray.filter((report) => report.assignedTo === name);
 }
 
 export function EditReportAsDeveloper(name, id, closeReason, comment) {
@@ -118,11 +118,11 @@ export function UpdateReportLabel(id, label) {
     if (report === undefined) {
         return new Error("There is no report with this id");
     }
-    if (report.label === undefined) {
-        report.label = [];
+    if (report.labels === undefined) {
+        report.labels = [];
     }
 
-    report.label.push(label);
+    report.labels.push(label);
 
     report.editedAt = getCurrentDateTimeFormatted();
 }
@@ -152,7 +152,7 @@ export function UpdateReportAssignedTo(id, assignedTo) {
 }
 
 export function UpdateReportPriority(id, priority) {
-    let report = reportArray.find(element => element.id === id)
+    let report = reportArray.find(report => report.id === id)
 
     if (report === undefined) {
         return new Error("There is no report with this id");
@@ -171,20 +171,21 @@ export function UpdateReportComment(id, comment) {
     if (report.comments === undefined) {
         report.comments = [];
     }
-
+    comment.createdAt = getCurrentDateTimeFormatted();
     report.comments.push(comment);
 
     report.editedAt = getCurrentDateTimeFormatted();
 }
 
 export function UpdateReportCloseReason(id, closeReason) {
-    let report = reportArray.find(element => element.id === id);
+    let report = reportArray.find(report => report.id === id);
 
     if (report === undefined) {
         return new Error("There is no report with this id");
     }
 
     report.closeReason = closeReason;
+    report.state = "Closed"
 
     report.closedAt = getCurrentDateTimeFormatted();
 }

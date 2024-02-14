@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="wrapper" id="wrapperID">
+        <div class="navbar">
+
+        </div>
+    
+        <div class="content">
+    
+        </div>
+    </div>
+    
+    <div class="loginPopup" id="loginPopupID">
+        <form id="loginForm">
+            <h1>Log in</h1>
+            <div class="element">
+                <label for="customer_number">Customer ID</label>
+                <input id="customer_number" type="text" name="customer_number" required="true" />
+            </div>
+            <button onclick="login()">Log in</button>
+            <p id="result"></p>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

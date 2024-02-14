@@ -32,6 +32,7 @@ export function CreateReport(category, customerId) {
         owner: 'Product Manager',
         createdAt: getCurrentDateTimeFormatted()
     });
+    increaseReportId();
 }
 
 export function UpdateReportDescription(id, description) {

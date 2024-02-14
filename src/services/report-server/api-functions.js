@@ -25,14 +25,16 @@ function getCurrentDateTimeFormatted() {
 }
 
 export function CreateReport(category, customerId) {
+    const id = getReportId();
     reportArray.push({
-        id: getReportId(),
+        id: id,
         category: category,
         customerId: customerId,
         owner: 'Product Manager',
         createdAt: getCurrentDateTimeFormatted()
     });
     increaseReportId();
+    return id;
 }
 
 export function UpdateReportDescription(id, description) {
@@ -42,8 +44,6 @@ export function UpdateReportDescription(id, description) {
     }
 
     report.description = description;
-
-    report.editedAt = getCurrentDateTimeFormatted();
 }
 
 export function UpdateReportLabel(id, label) {

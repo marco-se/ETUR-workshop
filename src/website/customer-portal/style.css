@@ -4,11 +4,12 @@ body {
 
 .wrapper {
     cursor: default;
+    filter: blur(3px);
 }
 
-.wrapper.blur {
+.wrapper.disableblur {
     transition: 1s;
-    filter: blur(3px);
+    filter: none;
     cursor: not-allowed;
 }
 
@@ -36,4 +37,10 @@ body {
 .loginPopup.disable {
     transition: 1s;
     transform: translate(-50%, -50%) scale(0);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

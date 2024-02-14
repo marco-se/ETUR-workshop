@@ -11,11 +11,12 @@
     
     <div class="wrapper" id="wrapperID">
         <div class="navbar">
-
+            <h1>Customer Portal</h1>
+            <p id="displayCustomerID"></p>
         </div>
     
-        <div class="content">
-    
+        <div class="content" id="contentID">
+            
         </div>
     </div>
     
@@ -27,9 +28,32 @@
                 <input id="customer_number" type="text" name="customer_number" required="true" />
             </div>
             <button onclick="login()">Log in</button>
-            <p id="result"></p>
+            <p id="loginResult"></p>
         </form>
     </div>
+
+    <div class="popups">
+        <div class="createCustomer" id="createCustomerID">
+            <form id="createForm">
+                <h1>Create Report</h1>
+                <div class="element">
+                    <label for="category">Category</label>
+                    <input id="category" type="text" name="customer_category" required="true" />
+                </div>
+                <div class="element">
+                    <label for="description">Description</label>
+                    <input id="description" type="text" name="customer_description" required="true" />
+                </div>
+                <div class="element">
+                    <label for="label">Label</label>
+                    <input id="culabeltomerId" type="text" name="customer_label" />
+                </div>
+                <button class="closeButton" onclick="toggleCreatePopup()">
+                    Close
+                </button>
+                <button type="submit" onclick="CreateReport()">Create Report</button>
+            </form>
+        </div>
 
     <script src="script.js"></script>
 </body>

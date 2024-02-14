@@ -37,7 +37,7 @@ class Report {
         this.priority = priority
         this.comments = comments
         this.closeReason = closeReason
-        this.references = references
+        this.reference = references
         reportId++
     }
 }

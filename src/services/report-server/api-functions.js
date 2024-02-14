@@ -4,12 +4,19 @@ export function GetAllCustomerReports(id) {
     return reportArray.filter((element) => element.customerId === id);
 }
 
-export function CreateCustomerReport(category, customerId, description) {
+export function CreateCustomerReport(category, customerId, description, label) {
+    if(label === undefined) {
+        label = [];
+    }
+    else {
+        label = [label];
+    }
     reportArray.push({
         id: getReportId(),
         category: category,
         customerId: customerId,
         description: description,
+        label: label,
         createdAt: getCurrentDateTimeFormatted(),
         state: "Open",
         owner: "Product Manager"
@@ -47,7 +54,7 @@ export function GetAllReports() {
     return reportArray;
 }
 
-export function EditReportAsManager(id, assignedTo, priority, comment) {
+export function EditReportAsManager(id, assignedTo, priority, comment, reference) {
     let report = reportArray.find(report => report.id === id);
     if (report === undefined) {
         return new Error("There is no report with this id");
@@ -55,14 +62,21 @@ export function EditReportAsManager(id, assignedTo, priority, comment) {
     report.editedAt = getCurrentDateTimeFormatted();
     report.assignedTo = assignedTo;
     report.priority = priority;
+
     if (report.comments === undefined) {
         report.comments = [];
     }
-
     if (comment !== undefined) {
         comment.createdAt = getCurrentDateTimeFormatted();
         comment.type = "product manager";
         report.comments.push(comment);
+    }
+
+    if (report.references === undefined) {
+        report.references = [];
+    }
+    if(reference !== undefined) {
+        report.references.push(reference);
     }
 }
 

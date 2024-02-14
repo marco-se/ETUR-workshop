@@ -24,6 +24,7 @@ const customerGetSchema = {
             id: { type: 'string' },
             category: { type: 'string' },
             description: { type: 'string' },
+            label: { type: 'array' },
             state: { type: 'string' },
             closeReason: { type: 'string' },
             comments: { type: 'array' },
@@ -46,6 +47,7 @@ const customerPostSchema = {
         customerId: { type: 'string' },
         category: { type: 'string' },
         description: { type: 'string' },
+        label: { type: 'string'}
       },
       required: ['customerId', 'category', 'description']
     },
@@ -53,7 +55,7 @@ const customerPostSchema = {
 }
 //Customer defines a report
 fastify.post('/customer/report', customerPostSchema, async function handler(request, reply) {
-  return CreateCustomerReport(request.body.category, request.body.customerId, request.body.description)
+  return CreateCustomerReport(request.body.category, request.body.customerId, request.body.description, request.body.label)
 })
 
 //Get all reports for a developer
@@ -104,6 +106,14 @@ const managerPostSchema = {
             author: { type: 'string' },
             message: { type: 'string' },
           }
+        },
+        reference: {
+          type: 'object',
+          properties: {
+            type: { type: 'string' },
+            url: { type: 'string' },
+            issueNumber: { type: 'number' }
+          }
         }
       },
       required: ['id', 'assignedTo', 'priority']
@@ -113,7 +123,7 @@ const managerPostSchema = {
 
 //Edit a report as a product manager
 fastify.patch('/manager/report', managerPostSchema, async function handler(request, reply) {
-  return EditReportAsManager(request.body.id, request.body.assignedTo, request.body.priority, request.body.comment)
+  return EditReportAsManager(request.body.id, request.body.assignedTo, request.body.priority, request.body.comment, request.body.reference)
 })
 
 // Run the server!

@@ -5,7 +5,7 @@ export function GetAllCustomerReports(id) {
 }
 
 export function CreateCustomerReport(category, customerId, description, label) {
-    if(label === undefined) {
+    if (label === undefined) {
         label = [];
     }
     else {
@@ -75,7 +75,7 @@ export function EditReportAsManager(id, assignedTo, priority, comment, reference
     if (report.references === undefined) {
         report.references = [];
     }
-    if(reference !== undefined) {
+    if (reference !== undefined) {
         report.references.push(reference);
     }
 }
@@ -90,4 +90,115 @@ function getCurrentDateTimeFormatted() {
     const seconds = String(date.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day}:${hours}:${minutes}:${seconds}`;
+}
+
+export function CreateReport(category, customerId) {
+    reportArray.push({
+        id: getReportId(),
+        category: category,
+        customerId: customerId,
+        owner: 'Product Manager',
+        createdAt: getCurrentDateTimeFormatted()
+    });
+}
+
+export function UpdateReportDescription(id, description) {
+    let report = reportArray.find(report => report.id === id);
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+
+    report.description = description;
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportLabel(id, label) {
+    let report = reportArray.find(report => report.id === id);
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+    if (report.label === undefined) {
+        report.label = [];
+    }
+
+    report.label.push(label);
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportState(id, state) {
+    let report = reportArray.find(report => report.id === id);
+
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+
+    report.state = state;
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportAssignedTo(id, assignedTo) {
+    let report = reportArray.find(report => report.id === id);
+
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+
+    report.assignedTo = assignedTo;
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportPriority(id, priority) {
+    let report = reportArray.find(element => element.id === id)
+
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+
+    report.priority = priority;
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportComment(id, comment) {
+    let report = reportArray.find(report => report.id === id);
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+    if (report.comments === undefined) {
+        report.comments = [];
+    }
+
+    report.comments.push(comment);
+
+    report.editedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportCloseReason(id, closeReason) {
+    let report = reportArray.find(element => element.id === id);
+
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+
+    report.closeReason = closeReason;
+
+    report.closedAt = getCurrentDateTimeFormatted();
+}
+
+export function UpdateReportReference(id, reference) {
+    let report = reportArray.find(report => report.id === id);
+    if (report === undefined) {
+        return new Error("There is no report with this id");
+    }
+    if (report.references === undefined) {
+        report.references = [];
+    }
+
+    report.references.push(reference);
+
+    report.editedAt = getCurrentDateTimeFormatted();
 }

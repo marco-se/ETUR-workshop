@@ -1,7 +1,12 @@
 import {
   GetAllCustomerReports, CreateCustomerReport,
   GetAllDeveloperReports, EditReportAsDeveloper,
-  GetAllReports, EditReportAsManager
+  GetAllReports, EditReportAsManager,
+  CreateReport, UpdateReportDescription,
+  UpdateReportAssignedTo, UpdateReportComment,
+  UpdateReportReference, UpdateReportCloseReason,
+  UpdateReportPriority, UpdateReportLabel,
+  UpdateReportState
 } from './api-functions.js';
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
@@ -191,7 +196,7 @@ const updateAssignedToSchema = {
 }
 //Updates the assignedTo of a report
 fastify.patch('/report/assignedTo', updateAssignedToSchema, async function handler(request, reply) {
-  return UpdateAssignedTo(request.body.id, request.body.assignedTo)
+  return UpdateReportAssignedTo(request.body.id, request.body.assignedTo)
 })
 
 const updateStateSchema = {

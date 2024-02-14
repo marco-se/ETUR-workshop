@@ -4,80 +4,12 @@ export function GetAllCustomerReports(id) {
     return reportArray.filter((report) => report.customerId === id);
 }
 
-export function CreateCustomerReport(category, customerId, description, label) {
-    if (label === undefined) {
-        label = [];
-    }
-    else {
-        label = [label];
-    }
-    reportArray.push({
-        id: getReportId(),
-        category: category,
-        customerId: customerId,
-        description: description,
-        label: label,
-        createdAt: getCurrentDateTimeFormatted(),
-        state: "Open",
-        owner: "Product Manager"
-    });
-
-    increaseReportId();
-}
-
 export function GetAllDeveloperReports(name) {
     return reportArray.filter((report) => report.assignedTo === name);
 }
 
-export function EditReportAsDeveloper(name, id, closeReason, comment) {
-    let report = reportArray.find(report => report.id === id);
-    if (report === undefined) {
-        return new Error("There is no report with this id");
-    }
-    if (report.assignedTo !== name) {
-        return new Error("Developer is not assigned to this report.");
-    }
-    if (report.comments === undefined) {
-        report.comments = [];
-    }
-    if (comment !== undefined) {
-        comment.createdAt = getCurrentDateTimeFormatted();
-        comment.type = "product manager";
-        report.comments.push(comment);
-    }
-    report.state = "Closed";
-    report.closedAt = getCurrentDateTimeFormatted();
-    report.closeReason = closeReason;
-}
-
 export function GetAllReports() {
     return reportArray;
-}
-
-export function EditReportAsManager(id, assignedTo, priority, comment, reference) {
-    let report = reportArray.find(report => report.id === id);
-    if (report === undefined) {
-        return new Error("There is no report with this id");
-    }
-    report.editedAt = getCurrentDateTimeFormatted();
-    report.assignedTo = assignedTo;
-    report.priority = priority;
-
-    if (report.comments === undefined) {
-        report.comments = [];
-    }
-    if (comment !== undefined) {
-        comment.createdAt = getCurrentDateTimeFormatted();
-        comment.type = "product manager";
-        report.comments.push(comment);
-    }
-
-    if (report.references === undefined) {
-        report.references = [];
-    }
-    if (reference !== undefined) {
-        report.references.push(reference);
-    }
 }
 
 function getCurrentDateTimeFormatted() {

@@ -6,6 +6,10 @@ function toggleCheckCustomerPopup() {
     document.getElementById("wrapperID").classList.toggle("disableblur");
 }
 
+function toggleCreateReportPopup() {
+    document.getElementById("createReportPopupID").classList.toggle("notvisible");
+}
+
 async function login() {
     const form = document.getElementById("loginForm");
     form.addEventListener("submit", (event) => {
@@ -27,12 +31,13 @@ async function login() {
         const result = await response.json();
 
         if (result === true) {
-            document.getElementById("loginResult").innerHTMl = "You've been successfully loged in.";
+            document.getElementById("loginResult").innerHTML = "You've been successfully loged in.";
             document.getElementById("displayCustomerID").innerHTML = currentCustomerID;
             toggleCheckCustomerPopup()
+            GetAllOpenReports();
         }
         else {
-            document.getElementById("loginResult").innerHTMl = "This customer does not exist!";
+            document.getElementById("loginResult").innerHTML = "This customer does not exist!";
         }
     } catch (error) {
         console.error(error);
@@ -143,6 +148,6 @@ async function CreateReport() {
     } catch (error) {
         console.error(error);
     }
-
+    toggleCreateReportPopup();
     GetAllOpenReports();
 }

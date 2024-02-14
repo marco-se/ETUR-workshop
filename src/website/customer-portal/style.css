@@ -13,7 +13,7 @@ body {
     cursor: not-allowed;
 }
 
-.loginPopup {
+.popup {
     background-color: #fff !important;
     position: absolute;
     transform: translate(-50%, -50%) scale(1);
@@ -34,8 +34,12 @@ body {
     cursor: default;
 }
 
-.loginPopup.disable {
+.popup.disable {
     transition: 1s;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.popup.notvisible {
     transform: translate(-50%, -50%) scale(0);
 }
 

@@ -7,11 +7,12 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="toggleCreateReportPopup()">
     
     <div class="wrapper" id="wrapperID">
         <div class="navbar">
             <h1>Customer Portal</h1>
+            <button onclick="toggleCreateReportPopup()">Create a Report</button>
             <p id="displayCustomerID"></p>
         </div>
     
@@ -20,7 +21,7 @@
         </div>
     </div>
     
-    <div class="loginPopup" id="loginPopupID">
+    <div class="popup" id="loginPopupID">
         <form id="loginForm">
             <h1>Log in</h1>
             <div class="element">
@@ -32,7 +33,7 @@
         </form>
     </div>
 
-    <div class="popups">
+    <div class="popup" id="createReportPopupID">
         <div class="createCustomer" id="createCustomerID">
             <form id="createForm">
                 <h1>Create Report</h1>
@@ -48,7 +49,7 @@
                     <label for="label">Label</label>
                     <input id="culabeltomerId" type="text" name="customer_label" />
                 </div>
-                <button class="closeButton" onclick="toggleCreatePopup()">
+                <button class="closeButton" onclick="toggleCreateReportPopup()">
                     Close
                 </button>
                 <button type="submit" onclick="CreateReport()">Create Report</button>

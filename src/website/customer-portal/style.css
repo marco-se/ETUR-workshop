@@ -3,14 +3,14 @@ body {
 }
 
 .wrapper {
-    cursor: default;
+    cursor: not-allowed;
     filter: blur(3px);
 }
 
 .wrapper.disableblur {
     transition: 1s;
     filter: none;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .popup {
@@ -47,4 +47,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.hidden {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.hidden.show {
+    transform: translate(-50%, -50%) scale(0);
 }

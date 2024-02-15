@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="toggleCreateReportPopup()">
-    
+
+<body onload="toggleCreateReportPopup(), toggleCommentPopup()">
+
     <div class="wrapper" id="wrapperID">
         <div class="navbar">
             <h1>Customer Portal</h1>
             <button onclick="toggleCreateReportPopup()">Create a Report</button>
             <p id="displayCustomerID"></p>
         </div>
-    
+
         <div class="content" id="contentID">
-            
+
         </div>
     </div>
-    
+
     <div class="popup" id="loginPopupID">
         <form id="loginForm">
             <h1>Log in</h1>
@@ -34,28 +36,52 @@
     </div>
 
     <div class="popup" id="createReportPopupID">
-        <div class="createCustomer" id="createCustomerID">
-            <form id="createForm">
-                <h1>Create Report</h1>
-                <div class="element">
-                    <label for="category">Category</label>
-                    <input id="category" type="text" name="customer_category" required="true" />
-                </div>
-                <div class="element">
-                    <label for="description">Description</label>
-                    <input id="description" type="text" name="customer_description" required="true" />
-                </div>
-                <div class="element">
-                    <label for="label">Label</label>
-                    <input id="culabeltomerId" type="text" name="customer_label" />
-                </div>
-                <button class="closeButton" onclick="toggleCreateReportPopup()">
-                    Close
-                </button>
-                <button type="submit" onclick="CreateReport()">Create Report</button>
-            </form>
-        </div>
+        <form id="createForm">
+            <h1>Create Report</h1>
+            <div class="element">
+                <label for="category">Category</label>
+                <input id="category" type="text" name="customer_category" required="true" />
+            </div>
+            <div class="element">
+                <label for="description">Description</label>
+                <input id="description" type="text" name="customer_description" required="true" />
+            </div>
+            <div class="element">
+                <label for="label">Label</label>
+                <input id="label" type="text" name="customer_label" />
+            </div>
+            <button class="closeButton" onclick="toggleCreateReportPopup()">
+                Close
+            </button>
+            <button type="submit" onclick="CreateReport()">Create Report</button>
+        </form>
+    </div>
+
+    <button onclick="toggleCommentPopup()">Comment</button>
+
+    <div class="popup" id="commentPopupID">
+        <form id="commentForm">
+            <h1>Comment</h1>
+            <div class="element">
+                <label for="author">Author</label>
+                <input id="author" type="text" name="comment_author" required="true" />
+            </div>
+            <div class="element">
+                <label for="message">Message</label>
+                <input id="message" type="text" name="comment_message" required="true" />
+            </div>
+            <div class="element">
+                <label for="type">Type</label>
+                <input id="type" type="text" name="comment_type" required="true" />
+            </div>
+            <button class="closeButton" onclick="toggleCommentPopup()">
+                Close
+            </button>
+            <button type="submit" onclick="CreateReport()">Create Report</button>
+        </form>
+    </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
